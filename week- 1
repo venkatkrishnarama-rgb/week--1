@@ -1,0 +1,80 @@
+@echo off
+title LAN Connectivity Test
+color 0A
+
+echo ==========================================
+echo     LAN CONNECTIVITY TESTING PROGRAM
+echo ==========================================
+echo.
+
+:MENU
+echo Select the computer on which this program
+echo is running:
+echo.
+echo 1. PC1 - 192.168.1.10
+echo 2. PC2 - 192.168.1.11
+echo 3. PC3 - 192.168.1.12
+echo 4. Display IP Configuration
+echo 5. Exit
+echo.
+
+set /p choice=Enter your choice (1-5):
+
+if "%choice%"=="1" goto PC1
+if "%choice%"=="2" goto PC2
+if "%choice%"=="3" goto PC3
+if "%choice%"=="4" goto CONFIG
+if "%choice%"=="5" goto END
+
+echo Invalid choice. Please try again.
+echo.
+goto MENU
+
+:CONFIG
+echo.
+echo ===== IP CONFIGURATION =====
+ipconfig
+echo.
+pause
+goto MENU
+
+:PC1
+echo.
+echo ===== PC1 CONNECTIVITY TEST =====
+echo Testing connection to PC2...
+ping -n 4 192.168.1.11
+echo.
+echo Testing connection to PC3...
+ping -n 4 192.168.1.12
+echo.
+pause
+goto MENU
+
+:PC2
+echo.
+echo ===== PC2 CONNECTIVITY TEST =====
+echo Testing connection to PC1...
+ping -n 4 192.168.1.10
+echo.
+echo Testing connection to PC3...
+ping -n 4 192.168.1.12
+echo.
+pause
+goto MENU
+
+:PC3
+echo.
+echo ===== PC3 CONNECTIVITY TEST =====
+echo Testing connection to PC1...
+ping -n 4 192.168.1.10
+echo.
+echo Testing connection to PC2...
+ping -n 4 192.168.1.11
+echo.
+pause
+goto MENU
+
+:END
+echo.
+echo LAN connectivity testing completed.
+exit
